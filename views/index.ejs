@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="jquery-3.5.1.min.js"></script>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  </head>
+  <body>
+    <div class="app">
+      <div id="takeusername">
+        <div class="form">
+            <h2>Write your username here....</h2>
+        </div>
+        <input id="username" type="text">
+        <div id="error"></div>
+        </div>
+       
+        <div id="board" >
+        <div id="chat" >
+          <div id="user"></div>
+          <div id="output"></div>
+          <div id="feedback"></div>
+        </div>
+        <div id="send">
+          <input type="text" placeholder="write your messsage here" id="message"><button id="btn">send</button>
+        </div> 
+      </div>
+      <div id="userslist" >
+        <div id="user">USERS LIST</div>
+      </div>
+      <div id="personalchat" >
+        <div id="person"></div>
+        <div id="privatechat" >
+        </div>
+        <div id="send">
+          <input type="text" placeholder="write your messsage here" id="privatemessage"><button id="privatebtn">send</button>
+        </div> 
+      </div>
+    </div>
+    <script src="/javascripts/view.js">
+    </script>
+  </body>
+</html>
