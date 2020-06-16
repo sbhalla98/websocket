@@ -1,5 +1,4 @@
-var socket = io.connect('http://localhost:4001/');
-var obj =[];
+var socket = io.connect('http://localhost:3000/');
 $('#board').hide();
 $('#personalchat').hide();
 $('#userslist').hide();
@@ -27,11 +26,6 @@ socket.on('feedback',function(data){
     feedback.innerHTML += '<div><span>'+data.handle+' is typing.....</span><div>'
 })
 socket.on('newuser',function(data,err){
-    console.log(err);
-    if(err){
-        console.log(err);
-    }
-    else{
     $('#takeusername').hide();
     $('#board').show();
     $('#userslist').show();
@@ -45,8 +39,6 @@ socket.on('newuser',function(data,err){
         $('#userslist').append('<div class="list"><span>'+element+'</span><button class="bton" onclick="display('+"'"+element+"'"+')">Chat</button><div>');
         }
     });
-    }
-    obj = data;
 })
 
 
