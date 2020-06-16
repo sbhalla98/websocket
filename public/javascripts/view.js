@@ -35,7 +35,6 @@ socket.on('newuser',function(data,err){
     $('#takeusername').hide();
     $('#board').show();
     $('#userslist').show();
-    $('.app').animate({height:"+=100px",width:"+=350px",margin:"0"});
     $('body').animate({padding:"10px"})
     $('#userslist').html('');
     $('#userslist').html('<div id="user">USERS LIST</div>');
@@ -55,6 +54,7 @@ var username = document.getElementById("username");
 username.addEventListener('keydown',function(e){
     if(e.keyCode==13){
         var name=$('#username').val();
+        $('.app').animate({height:"+=100px",width:"+=350px",margin:"0"});
         $('#user').html(name);
         socket.emit('newuser',{
             handle:name
