@@ -34,7 +34,7 @@ io.on('connect',(socket)=>{
     socket.broadcast.emit('feedback',response);
   })
   socket.on('newuser',(response,cb)=>{
-    if(response in users){
+    if(response.handle in users){
       cb(false);
     }
     else{
