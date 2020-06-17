@@ -1,4 +1,4 @@
-var socket = io.connect('http://localhost:3000/');
+var socket = io.connect('https://letcat.herokuapp.com/');
 $('#board').hide();
 $('#personalchat').hide();
 $('#userslist').hide();
@@ -46,6 +46,9 @@ var username = document.getElementById("username");
 username.addEventListener('keydown',function(e){
     if(e.keyCode==13){
         var name=$('#username').val();
+        if(name.trim()==""){
+            $('#error').html("choose your username");
+        }
         $('.app').animate({height:"+=100px",width:"+=350px",margin:"0"});
         $('#user').html(name);
         socket.emit('newuser',{
