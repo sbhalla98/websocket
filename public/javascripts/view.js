@@ -50,13 +50,12 @@ username.addEventListener('keydown',function(e){
             $('#error').html("choose your username");
         }
         else{
-        $('.app').animate({height:"+=100px",width:"+=350px",margin:"0"});
         $('#user').html(name);
         socket.emit('newuser',{handle:name},function(data){
             if(data==false){
                 $('#error').html("this username is already taken!!");
             }
-            if(data==true){
+            else{
                 $('.app').animate({height:"+=100px",width:"+=350px",margin:"0"});
             }
         });
@@ -86,9 +85,7 @@ socket.on('privatechat',function(data){
 socket.on('sendchat',function(data){
     output.innerHTML += '<div ><span>!!!YOU SENT !!! private message!!! </span>'+' : '+'<div>'+data.data+'</div><div>'
 })
-socket.on('r',function(){
-    console.log("here");
-})
+
 
 socket.on('disconnect', (reason) => {
     var x=socket.open();
