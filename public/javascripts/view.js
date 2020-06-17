@@ -49,11 +49,15 @@ username.addEventListener('keydown',function(e){
         if(name.trim()==""){
             $('#error').html("choose your username");
         }
+        else{
         $('.app').animate({height:"+=100px",width:"+=350px",margin:"0"});
         $('#user').html(name);
-        socket.emit('newuser',{
-            handle:name
-        },function(data){ $('#error').html(data)})
+        socket.emit('newuser',{handle:name},function(data){
+            if(data==false){
+                $('#error').html("this username is already taken!!");
+            }
+        });
+        }
     }
 })
 function display(e){
@@ -76,3 +80,18 @@ privatebtn.addEventListener('click',function(){
 socket.on('privatechat',function(data){
     output.innerHTML += '<div ><span>!!!private message!!! '+data.handle+'</span>'+' : '+'<span>'+data.data+'</span><div>'
 })
+socket.on('sendchat',function(data){
+    output.innerHTML += '<div ><span>!!!YOU SENT !!! private message!!! </span>'+' : '+'<div>'+data.data+'</div><div>'
+})
+socket.on('r',function(){
+    console.log("here");
+})
+
+socket.on('disconnect', (reason) => {
+    var x=socket.open();
+    x.emit('user',{ handle: $('#user').html()});
+  });
+
+  socket.on('user',(socket)=>{
+      socket.name=$('#user').html();
+  })

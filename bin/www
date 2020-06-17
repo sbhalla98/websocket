@@ -7,47 +7,57 @@ users = {};
 var app = require('../app');
 var debug = require('debug')('mywebsocketapp:server');
 var http = require('http');
+const { connect } = require('http2');
 
 
 /**
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '3000');
+var port = normalizePort(process.env.PORT || '4002');
 app.set('port', port);
 
 /**
  * Create HTTP server.
  */
-
 var server = http.createServer(app);
 var io = require('socket.io')(server);
-io.on('connection',function(socket){
-  socket.on('chat',function(response){
+io.on('connect',(socket)=>{
+  socket.on('chat',(response)=>{
     io.sockets.emit('chat',response);
   })
-  socket.on('privatechat',function(response){
+  socket.on('privatechat',(response)=>{
     users[response.sendto].emit('privatechat',response);
+    socket.emit('sendchat',(response));
   })
-  socket.on('feedback',function(response){
+  socket.on('feedback',(response)=>{
     socket.broadcast.emit('feedback',response);
   })
-  socket.on('newuser',function(response,cb){
-    if(response.handle in users){
-      var error="This username is already taken!!!";
-      cb(error);
+  socket.on('newuser',(response,cb)=>{
+    if(response in users){
+      cb(false);
     }
     else{
+    cb(true);
     socket.name = response.handle;
     users[response.handle]=socket;
+    console.log(Object.keys(users));
     io.sockets.emit('newuser',Object.keys(users));
     }
   })
-  socket.on('disconnect',function(){
-    delete users[socket.name];
-    io.sockets.emit('newuser',Object.keys(users));
+  socket.on('user',function(response){
+    socket.name=response.handle;
+    users[response.handle]=socket;
   })
-  
+  socket.on('disconnect',(reason)=>{
+    if(reason=='transport close'){
+      delete users[socket.name];
+      io.sockets.emit('newuser',Object.keys(users));
+    }
+    else{
+      delete users[socket.name];
+    }
+  })
 });
 
 

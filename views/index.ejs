@@ -6,7 +6,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="jquery-3.5.1.min.js"></script>
-    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   </head>
   <body>
@@ -22,6 +21,7 @@
         <div id="board" >
         <div id="chat" >
           <div id="user"></div>
+          <div id="place">These are the public chats!!</div>
           <div id="output"></div>
           <div id="feedback"></div>
         </div>
@@ -37,6 +37,7 @@
         <div id="privatechat" >
         </div>
         <div id="send">
+          <div id="place">Messgaes sent this chat are private</div>
           <input type="text" placeholder="write your messsage here" id="privatemessage"><button id="privatebtn">send</button>
         </div> 
       </div>
