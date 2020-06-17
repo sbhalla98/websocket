@@ -56,6 +56,9 @@ username.addEventListener('keydown',function(e){
             if(data==false){
                 $('#error').html("this username is already taken!!");
             }
+            if(data==true){
+                $('.app').animate({height:"+=100px",width:"+=350px",margin:"0"});
+            }
         });
         }
     }
