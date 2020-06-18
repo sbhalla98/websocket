@@ -7,7 +7,6 @@ users = {};
 var app = require('../app');
 var debug = require('debug')('mywebsocketapp:server');
 var http = require('http');
-const { connect } = require('http2');
 
 
 /**

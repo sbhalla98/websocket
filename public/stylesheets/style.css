@@ -134,6 +134,7 @@ a {
   margin:0 1% 0 1%;
   background-color: white;
   float: left;
+  overflow-y: scroll;
 }
 
 .list{
