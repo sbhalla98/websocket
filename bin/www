@@ -53,9 +53,6 @@ io.on('connect',(socket)=>{
       delete users[socket.name];
       io.sockets.emit('newuser',Object.keys(users));
     }
-    else{
-      delete users[socket.name];
-    }
   })
 });
 
