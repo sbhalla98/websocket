@@ -1,4 +1,4 @@
-//var socket = io.connect('http://localhost:4000/');
+var socket = io.connect('https://letcat.herokuapp.com/');
 $('#board').hide();
 $('#personalchat').hide();
 $('#userslist').hide();
@@ -20,7 +20,7 @@ message.addEventListener('focus',function(){
 },[])
 socket.on('chat',function(data){
     feedback.innerHTML = "";
-    output.innerHTML += '<div><span>'+data.handle+'</span>'+' : '+'<span>'+data.data+'</span><div>'
+    output.innerHTML += '<div style="color:red; padding:1%; font-weight: bold;"><span>'+data.handle+'</span>'+' : '+'<span>'+data.data+'</span><div>'
 })
 socket.on('feedback',function(data){
     feedback.innerHTML += '<div><span>'+data.handle+' is typing.....</span><div>'
@@ -80,12 +80,14 @@ privatebtn.addEventListener('click',function(){
 })
 
 socket.on('privatechat',function(data){
-    output.innerHTML += '<div ><span>!!!private message!!! '+data.handle+'</span>'+' : '+'<span>'+data.data+'</span><div>'
+    output.innerHTML += '<div style="color:red; padding:1%; font-style: italic;"><span>!!!private message!!! '+data.handle+'</span>'+' : '+'<span>'+data.data+'</span><div>'
 })
 socket.on('sendchat',function(data){
-    output.innerHTML += '<div ><span>!!!YOU SENT !!! private message!!! </span>'+' : '+'<div>'+data.data+'</div><div>'
+    output.innerHTML += '<div style="color:blue; padding:1%;"><span>!!!YOU SENT !!! private message!!! </span>'+' : '+'<div>'+data.data+'</div><div>'
 })
-
+socket.on('r',function(){
+    console.log("here");
+})
 
 socket.on('disconnect', (reason) => {
     var x=socket.open();
