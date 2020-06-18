@@ -1,4 +1,4 @@
-var socket = io.connect('https://letcat.herokuapp.com/');
+//var socket = io.connect('http://localhost:4000/');
 $('#board').hide();
 $('#personalchat').hide();
 $('#userslist').hide();
@@ -50,11 +50,13 @@ username.addEventListener('keydown',function(e){
             $('#error').html("choose your username");
         }
         else{
-        $('.app').animate({height:"+=100px",width:"+=350px",margin:"0"});
         $('#user').html(name);
         socket.emit('newuser',{handle:name},function(data){
             if(data==false){
                 $('#error').html("this username is already taken!!");
+            }
+            else{
+                $('.app').animate({height:"+=100px",width:"+=350px",margin:"0"});
             }
         });
         }
