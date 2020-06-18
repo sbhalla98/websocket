@@ -85,9 +85,7 @@ socket.on('privatechat',function(data){
 socket.on('sendchat',function(data){
     output.innerHTML += '<div ><span>!!!YOU SENT !!! private message!!! </span>'+' : '+'<div>'+data.data+'</div><div>'
 })
-socket.on('r',function(){
-    console.log("here");
-})
+
 
 socket.on('disconnect', (reason) => {
     var x=socket.open();
