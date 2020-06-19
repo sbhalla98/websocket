@@ -26,11 +26,17 @@ io.on('connect',(socket)=>{
     io.sockets.emit('chat',response);
   })
   socket.on('privatechat',(response)=>{
-    users[response.sendto].emit('privatechat',response);
+    function sendChat(){
+      users[response.sendto].emit('privatechat',response);
+    }
+    setTimeout(sendChat, 500);
     socket.emit('sendchat',(response));
   })
   socket.on('feedback',(response)=>{
     socket.broadcast.emit('feedback',response);
+  })
+  socket.on('feedbackout',()=>{
+    socket.broadcast.emit('feedbackout');
   })
   socket.on('newuser',(response,cb)=>{
     if(response.handle in users){

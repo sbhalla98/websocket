@@ -18,12 +18,18 @@ message.addEventListener('focus',function(){
         handle:$('#user').html()
     })
 },[])
+message.addEventListener('blur',function(){
+    socket.emit('feedbackout')
+},[])
 socket.on('chat',function(data){
     feedback.innerHTML = "";
     output.innerHTML += '<div style="color:green; padding:1%; font-weight: bold;"><span>'+data.handle+'</span>'+' : '+'<span>'+data.data+'</span><div>'
 })
 socket.on('feedback',function(data){
     feedback.innerHTML += '<div><span>'+data.handle+' is typing.....</span><div>'
+})
+socket.on('feedbackout',function(data){
+    feedback.innerHTML = '';
 })
 socket.on('newuser',function(data,err){
     $('#takeusername').hide();
@@ -35,7 +41,6 @@ socket.on('newuser',function(data,err){
     $('#userslist').append('<div class="list"><span>'+$('#user').html()+'</span><div>')
     data.forEach(element => {
         if(element!=$('#user').html()){
-        console.log(data);
         $('#userslist').append('<div class="list"><span>'+element+'</span><button class="bton" onclick="display('+"'"+element+"'"+')">Chat</button><div>');
         }
     });
